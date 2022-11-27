@@ -1,0 +1,52 @@
+id;name;result
+pro_nam;Protokollname;Quellen Protokoll - Struktur
+que_ktn;Kanton;UR
+que_idn;ID;1205-5005
+que_nam;Quellname;Spiss 1
+erh_dat;Datum;12.07.2022
+kox;Koord_X;693285
+koy;Koord_Y;192610
+flu_nam;Flurname;Spiss
+hoe_uem;Hoehe_mueM;640
+bea_nam;BearbeiterIn;kag
+aus_for;Austrittform;Fallquelle
+han_lag;Hanglage;Mittelhang
+abf_ric;Abflussrichtung;SO
+gel_nei;Gelaendeneigung;mässig
+qus_zei;Quellschuettung;
+mit_fli;Fliessgeschwindigkeit;mässig
+que_gro;Quelle_Groesse;2
+que_ber;Quellbereich;3
+que_lae;Quellbachlaenge;20
+was_tem;Wassertemperatur;13.3
+qus_wer;Quellschuettung;0.5
+lei_fae;Leitfaehigkeit;510
+ver_ein;Vernetzung_Einzelquelle;
+ver_qsy;Vernetzung_Q_system;x
+ver_qko;Vernetzung_Q_komplex;
+dis_nac;Distanz_Nachbarquelle;
+anz_aus;Anzahl_Austritte;15
+bem;Bemerkungen;"Wasser fliesst an den Wänden des Tunnels herab, Quellbach fliesst in Rinne und dann Dohle; Kalksinter, Terassenbildung, teilweise Eisenablagerungen; keine Vegetation; Im Quellkataster al Quellen 1205-5005 bis 5015 erfasst, aber besser als eine einzige Quelle anzusehen"
+fot_dok;Fotos_Dokumente;x
+fot_idn;Foto_ID;1205.5005 Spiss 1
+nut_tri;Trinkwassernutzung;
+nut_sch;Schutzstatus;
+nut_kul;Kulturhistorische_Bedeutung;
+rev_obj;Revitalisierungsobjekt;
+kla_nat;Klassierung_naturnah;
+kla_bed;Klassierung_bedingt_naturnah;
+kla_mae;Klassierung_maessig_beeintraechtigt;
+kla_ges;Klassierung_geschaedigt;
+kla_sta;Klassierung_stark_geschaedigt;x
+be1;Bewertung_1;
+be2;Bewertung_2;
+be3;Bewertung_3;
+be4;Bewertung_4;
+be5;Bewertung_5;x
+wea;Wert_A_Beeintraechtigung;5
+web;Wert_B_Vegetation_Nutzung_Struktur;4.125
+wer_auf;Aufwertung;0
+wer_ges;Gesamtergebnis;4.5625
+n_b_zer;Nicht_bewertbar_zerstoert;
+n_b_k_a;Nicht_bewertbar_kein_Abfluss;
+phw;pH-Wert;

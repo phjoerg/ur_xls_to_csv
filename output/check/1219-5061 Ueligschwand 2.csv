@@ -1,0 +1,52 @@
+id;name;result
+pro_nam;Protokollname;Quellen Protokoll - Struktur
+que_ktn;Kanton;UR
+que_idn;ID;1219-5061
+que_nam;Quellname;Ueligschwand 2
+erh_dat;Datum;22.07.2021
+kox;Koord_X;701562
+koy;Koord_Y;189274
+flu_nam;Flurname;Ueligschwand
+hoe_uem;Hoehe_mueM;1165
+bea_nam;BearbeiterIn;kag
+aus_for;Austrittform;Fallquelle
+han_lag;Hanglage;Oberhang
+abf_ric;Abflussrichtung;W
+gel_nei;Gelaendeneigung;schroff
+qus_zei;Quellschuettung;ganzjährig
+mit_fli;Fliessgeschwindigkeit;sehr schnell
+que_gro;Quelle_Groesse;1
+que_ber;Quellbereich;6
+que_lae;Quellbachlaenge;160
+wat_mes;Wassertemperatur_Messung;8
+qus_mes;Quellschuettung_Messung;50
+lef_mes;Leitfaehigkeit_Messung;270
+ver_ein;Vernetzung_Einzelquelle;
+ver_qsy;Vernetzung_Q_system;x
+ver_qko;Vernetzung_Q_komplex;
+dis_nac;Distanz_Nachbarquelle;40
+anz_aus;Anzahl_Austritte;2
+bem;Bemerkungen;"pH 8.00; Fauna nicht untersucht; (Sommer 2021 mit sehr starken, anhaltenden Regenfällen & Hochwasser)"
+fot_dok;Fotos_Dokumente;x
+fot_idn;Foto_ID;1219-5061
+nut_tri;Trinkwassernutzung;
+nut_sch;Schutzstatus;
+nut_kul;Kulturhistorische_Bedeutung;
+rev_obj;Revitalisierungsobjekt;NEIN
+kla_nat;Klassierung_naturnah;x
+kla_bed;Klassierung_bedingt_naturnah;
+kla_mae;Klassierung_maessig_beeintraechtigt;
+kla_ges;Klassierung_geschaedigt;
+kla_sta;Klassierung_stark_geschaedigt;
+be1;Bewertung_1;x
+be2;Bewertung_2;
+be3;Bewertung_3;
+be4;Bewertung_4;
+be5;Bewertung_5;
+wea;Wert_A_Beeintraechtigung;1
+web;Wert_B_Vegetation_Nutzung_Struktur;1.0833333333333333
+wer_auf;Aufwertung;0.4
+wer_ges;Gesamtergebnis;0.6416666666666665
+n_b_zer;Nicht_bewertbar_zerstoert;
+n_b_k_a;Nicht_bewertbar_kein_Abfluss;
+phw;pH_Wert_Messung;8.0
