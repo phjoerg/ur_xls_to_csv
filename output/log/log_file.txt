@@ -1,0 +1,30 @@
+1202 Gand 1.xls
+FEHLER - Quellen-ID fehlt oder unvollständig
+------------------------------------------------------------
+1202 Zen Staflen 6 unvollständig.xls
+FEHLER - Quellen-ID fehlt oder unvollständig
+------------------------------------------------------------
+1202-5011 Bäzgand 1.xls
+------------------------------------------------------------
+1202-5015 Gandstafel 1.xls
+------------------------------------------------------------
+1204-5025 Secki 1.xls
+------------------------------------------------------------
+1205 Teilalp 5.xls
+FEHLER - Quellen-ID fehlt oder unvollständig
+------------------------------------------------------------
+1205-5005 Spiss 1.xls
+------------------------------------------------------------
+1205-5017 Ennermatt 1 unvollständig.xls
+FEHLER - Bitte Zutreffendes ankreuzen (x) bei Vernetzung
+FEHLER - Bitte Zutreffendes ankreuzen (x) bei Klassierung
+FEHLER - Bitte Zutreffendes ankreuzen (x) bei Bewertung
+------------------------------------------------------------
+1205-5024 Stelli 4.xls
+------------------------------------------------------------
+1205-5069 Lücken 1.xls
+------------------------------------------------------------
+1219-5011 Unter Balm 3.xls
+------------------------------------------------------------
+1219-5061 Ueligschwand 2.xls
+------------------------------------------------------------
