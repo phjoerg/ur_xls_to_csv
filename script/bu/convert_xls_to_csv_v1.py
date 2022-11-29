@@ -3,16 +3,31 @@ import sys
 import pandas as pd
 import numpy as np
 import re
-import math
 from pathlib import Path
 pd.options.mode.chained_assignment = None
+
+
+def read_message_csv(pat_mes):
+    """read text of messages (error, warning, sucess)"""
+    dfr_mes = pd.read_csv(str(pat_mes), delimiter=';')
+    dfr_mes = dfr_mes.set_index('id')
+    return dfr_mes
+
+
+def write_log_file(pat_log, mes_log):
+    # message in Terminal
+    print(mes_log)
+    textfile = open(pat_log, 'a')
+    textfile.write(mes_log + '\n')
+    textfile.close()
 
 
 def get_file_list_xls(dir_inp):
     """return list of xls-files"""
     lis_xls = list(Path(str(dir_inp)).glob('*.xls'))
     if not lis_xls:
-        sys.exit('ERROR - Keine xlsx-Dateien in Input-Verzeichnis')
+        write_log_file(pat_log, dfr_mes.loc[3, lan_mes])
+        sys.exit(1)
     return lis_xls
 
 
@@ -27,16 +42,13 @@ def colToExcel(col):
 
 
 def read_fields_csv(pat_fie):
-    """read csv-table with row / col of input fields"""
+    """read position of input fields (f.e. A1, B3, etc.)"""
     dfr_fie = pd.read_csv(str(pat_fie), delimiter=';')
     dfr_fie = dfr_fie.set_index('id')
     return dfr_fie
 
 
-def check_values(pat_inp, dfr_res):
-    pro_nam = dfr_res.loc['pro_nam', 'result']
-    if not pro_nam.__contains__('Struktur'):
-        print('Kein deutsches Quell-Protokoll - FEHLER')
+def check_values(dfr_res):
     erh_dat = dfr_res.loc['erh_dat', 'result']
     dfr_res.loc['erh_dat', 'result'] = erh_dat.strftime("%d.%m.%Y")
     dfr_res.loc['phw', 'name'] = 'pH_Wert_Messung'
@@ -47,8 +59,7 @@ def check_values(pat_inp, dfr_res):
         dfr_res.loc['phw', 'result'] = float('nan')
     que_idn = str(dfr_res.loc['que_idn', 'result'])
     if 'NAN' in que_idn.upper() or 'X' in que_idn.upper():
-        print('FEHLER - Quellen-ID fehlt oder unvollständig')
-    # WEITER check if que_idn == foto id (sonst Warnung)
+        write_log_file(pat_log, dfr_mes.loc[4, lan_mes])
     return dfr_res
 
 
@@ -67,45 +78,58 @@ def check_single_choice(pat_sin, dfr_res):
         for cur in ser_sin:
             mem = dfr_res.loc[cur, 'result']
             if mem == 'x' or mem == 'X':
+                # res... result (str) needed in future !!
                 res = dfr_res.loc[cur, 'name']
                 cou += 1
-        if cou == 0:
-            print('WARNUNG - Bitte Zutreffendes ankreuzen (x) bei', gro_nam)
+        n_b_zer = str(dfr_res.loc['n_b_zer', 'result'])
+        n_b_k_a = str(dfr_res.loc['n_b_k_a', 'result'])
+        if n_b_zer.upper() == 'X' or n_b_k_a.upper() == 'X':
+            que_n_b = 1
+        else:
+            que_n_b = 0
+        if cou == 0 and que_n_b == 0:
+            write_log_file(pat_log, dfr_mes.loc[5, lan_mes] + ' ' + gro_nam)
         elif cou > 1:
-            print('WARNUNG - Keine Mehrfachauswahl (x) erlaubt bei', gro_nam)
+            write_log_file(pat_log, dfr_mes.loc[6, lan_mes] + ' ' + gro_nam)
     return dfr_res
 
 
 def read_file_xls(pat_inp, pat_sin, dfr_fie):
     """read defined fields of xls file and return to dfr_res"""
-    print(pat_inp.name)
+    write_log_file(pat_log, pat_inp.name)
     dfr_str = pd.read_excel(str(pat_inp), sheet_name='Q_Bewertung_Struktur_D', header=None)
     dfr_str = dfr_str.rename(index=lambda x: x + 1, columns=lambda y: colToExcel(y + 1))
     dfr_res = dfr_fie[['name']]
-    # dfr_res['result'] = pd.Series(dtype=str)
     for ind, row in dfr_fie.iterrows():
         dfr_res.loc[ind, 'result'] = dfr_str.loc[row['line'], row['column']]
-    dfr_res = check_values(pat_inp, dfr_res)
+    dfr_res = check_values(dfr_res)
     dfr_res = check_single_choice(pat_sin, dfr_res)
     fil_che = pat_inp.stem + '.csv'
     pat_che = dir_che / fil_che
     dfr_res.to_csv(pat_che, sep=';')
-    print('---------------------------------------------')
+    write_log_file(pat_log, '------------------------------------------------------------')
     return dfr_res
 
 
 print('**** START **********************************************************************************')
 
+global dfr_mes
+global lan_mes
+# define language here - later in .ini-file with configparse
+lan_mes = 'messageGerman'
 dir_cur = Path().resolve()
-
 dir_ini = dir_cur / 'ini'
 dir_inp = dir_cur / 'input'
 dir_out = dir_cur / 'output'
 dir_che = dir_out / 'check'
 dir_log = dir_out / 'log'
 pat_fie = dir_ini / 'fields.csv'
+pat_mes = dir_ini / 'message.csv'
 pat_sin = dir_ini / 'single_choice.csv'
+pat_log = dir_log / 'log_file.txt'
 
+pat_log.unlink(missing_ok=True)
+dfr_mes = read_message_csv(pat_mes)
 dfr_fie = read_fields_csv(pat_fie)
 lis_xls = get_file_list_xls(dir_inp)
 for pat_inp in lis_xls:
@@ -114,7 +138,10 @@ for pat_inp in lis_xls:
 
 print('**** END ************************************************************************************')
 
-# TODO
+# WEITER - TODO !!!
+# def write_log_file
+# .ini-file with language path absolut, etc. (configparse)
+
 # read csv single choice
 # single choice - warnungen bestehend einpflegen
 # logfile erzeugen immer eine Zeile mit xls ---
