@@ -2,7 +2,9 @@ id;type;title;messageGerman;messageEnglish;messageFrance;messageItalian
 1;9;Quellen UR - beta v1.1;© Monitron AG, 2023;;;
 2;1;Quellen UR - beta v1.1;Bitte Ordner mit Quellprotokollen (.xlsx) auswählen;;;
 3;3;Quellen UR - beta v1.1;FEHLER - Keine xlsx-Dateien in Input-Verzeichnis - ABBRUCH;;;
-4;3;Quellen UR - beta v1.1;FEHLER - Quellen-ID fehlt oder unvollständig;;;
-5;3;Quellen UR - beta v1.1;FEHLER - Bitte Zutreffendes ankreuzen (x) bei;;;
-6;3;Quellen UR - beta v1.1;FEHLER - Keine Mehrfachauswahl (x) erlaubt bei;;;
-7;9;Quellen UR - beta v1.1;Alle csv-Dateien erfolgreich exportiert;;;
+4;3;Quellen UR - beta v1.1;FEHLER - Quellen-ID unvollständig oder fehlend;;;
+5;3;Quellen UR - beta v1.1;FEHLER – Quelle nicht bewertbar ankreuzen oder Zutreffendes markieren bei;;;
+6;3;Quellen UR - beta v1.1;FEHLER - Keine Mehrfachauswahl erlaubt bei;;;
+7;3;Quellen UR - beta v1.1;FEHLER - Doppelte Auswahl bei Quelle nicht bewertbar und Wert A;;;
+8;3;Quellen UR - beta v1.1;FEHLER - Doppelte Auswahl bei Quelle nicht bewertbar und Wert B;;;
+9;9;Quellen UR - beta v1.1;Alle csv-Dateien erfolgreich exportiert;;;

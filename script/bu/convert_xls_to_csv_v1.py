@@ -1,10 +1,36 @@
 from operator import index
 import sys
-import pandas as pd
-import numpy as np
 import re
 from pathlib import Path
+import time
+from datetime import datetime, timedelta
+import pandas as pd
 pd.options.mode.chained_assignment = None
+
+
+def write_log_file(pat_log, mes_log):
+    print(mes_log)    # message in Terminal
+    textfile = open(pat_log, 'a')
+    textfile.write(mes_log + '\n')
+    textfile.close()
+
+
+def write_header_logfile(pat_log):
+    cur_tim = datetime.now()
+    sum_tim = bool(time.localtime(cur_tim.timestamp()).tm_isdst)
+    if sum_tim:
+        cur_tim = cur_tim - timedelta(hours=1)
+    txt = '                                      Kanton Uri - Amt für Umweltschutz'
+    cur_tim = cur_tim.strftime('%d.%m.%Y %H:%M')
+    hea = lin + '\n' + cur_tim + txt + '\n' + lin
+    write_log_file(pat_log, hea)
+
+
+def write_footer_logfile(pat_log):
+    fil_log = pat_log.name
+    txt = fil_log + '                                                       Monitron AG'
+    foo = txt + '\n' + lin
+    write_log_file(pat_log, foo)
 
 
 def read_message_csv(pat_mes):
@@ -12,14 +38,6 @@ def read_message_csv(pat_mes):
     dfr_mes = pd.read_csv(str(pat_mes), delimiter=';')
     dfr_mes = dfr_mes.set_index('id')
     return dfr_mes
-
-
-def write_log_file(pat_log, mes_log):
-    # message in Terminal
-    print(mes_log)
-    textfile = open(pat_log, 'a')
-    textfile.write(mes_log + '\n')
-    textfile.close()
 
 
 def get_file_list_xls(dir_inp):
@@ -63,11 +81,30 @@ def check_values(dfr_res):
     return dfr_res
 
 
-def check_single_choice(pat_sin, dfr_res):
-    """read csv-table with fields of single-choice"""
-    dfr_sin = pd.read_csv(str(pat_sin), delimiter=';')
-    dfr_sin = dfr_sin.set_index('no')
-    idx_max = dfr_sin.index.max() + 1
+def cross_check_fields(dfr_res, cou, i, gro_nam, pat_log):
+    """check Quelle nicht bewertbar against other fields"""
+    n_b_zer = str(dfr_res.loc['n_b_zer', 'result'])
+    n_b_k_a = str(dfr_res.loc['n_b_k_a', 'result'])
+    wea = dfr_res.loc['wea', 'result']
+    web = dfr_res.loc['web', 'result']
+    que_n_b = 0
+    if n_b_zer.upper() == 'X' or n_b_k_a.upper() == 'X':
+        que_n_b = 1
+    if cou == 0 and que_n_b == 0:
+        write_log_file(pat_log, dfr_mes.loc[5, lan_mes] + ' ' + gro_nam)
+    elif cou > 1:
+        write_log_file(pat_log, dfr_mes.loc[6, lan_mes] + ' ' + gro_nam)
+    elif i == 3 and que_n_b == 1 and not pd.isna(wea):
+        write_log_file(pat_log, dfr_mes.loc[7, lan_mes])
+    elif i == 4 and que_n_b == 1 and not pd.isna(web):
+        write_log_file(pat_log, dfr_mes.loc[8, lan_mes])
+
+
+def check_single_choice(pat_fie, pat_log, dfr_res):
+    """check single-choice groups"""
+    dfr_sin = pd.read_csv(str(pat_fie), delimiter=';')
+    dfr_sin = dfr_sin.set_index('single_choice')
+    idx_max = int(dfr_sin.index.max() + 1)
     for i in range(1, idx_max):
         # series containing id of 1st, 2nd, ... group
         ser_sin = dfr_sin.loc[i, 'id']
@@ -77,24 +114,13 @@ def check_single_choice(pat_sin, dfr_res):
         cou = 0
         for cur in ser_sin:
             mem = dfr_res.loc[cur, 'result']
-            if mem == 'x' or mem == 'X':
-                # res... result (str) needed in future !!
-                res = dfr_res.loc[cur, 'name']
+            if mem == 'x' or mem == 'X' or mem == 1:
+                # res = dfr_res.loc[cur, 'name']      res (string) ev. nec. for csv ?
                 cou += 1
-        n_b_zer = str(dfr_res.loc['n_b_zer', 'result'])
-        n_b_k_a = str(dfr_res.loc['n_b_k_a', 'result'])
-        if n_b_zer.upper() == 'X' or n_b_k_a.upper() == 'X':
-            que_n_b = 1
-        else:
-            que_n_b = 0
-        if cou == 0 and que_n_b == 0:
-            write_log_file(pat_log, dfr_mes.loc[5, lan_mes] + ' ' + gro_nam)
-        elif cou > 1:
-            write_log_file(pat_log, dfr_mes.loc[6, lan_mes] + ' ' + gro_nam)
-    return dfr_res
+        cross_check_fields(dfr_res, cou, i, gro_nam, pat_log)
 
 
-def read_file_xls(pat_inp, pat_sin, dfr_fie):
+def process_spring_report_xls(pat_inp, pat_fie, dfr_fie):
     """read defined fields of xls file and return to dfr_res"""
     write_log_file(pat_log, pat_inp.name)
     dfr_str = pd.read_excel(str(pat_inp), sheet_name='Q_Bewertung_Struktur_D', header=None)
@@ -103,18 +129,17 @@ def read_file_xls(pat_inp, pat_sin, dfr_fie):
     for ind, row in dfr_fie.iterrows():
         dfr_res.loc[ind, 'result'] = dfr_str.loc[row['line'], row['column']]
     dfr_res = check_values(dfr_res)
-    dfr_res = check_single_choice(pat_sin, dfr_res)
+    check_single_choice(pat_fie, pat_log, dfr_res)
     fil_che = pat_inp.stem + '.csv'
     pat_che = dir_che / fil_che
     dfr_res.to_csv(pat_che, sep=';')
-    write_log_file(pat_log, '------------------------------------------------------------')
-    return dfr_res
+    write_log_file(pat_log, lin)
 
 
-print('**** START **********************************************************************************')
-
+global lin
 global dfr_mes
 global lan_mes
+lin = '---------------------------------------------------------------------------------------'
 # define language here - later in .ini-file with configparse
 lan_mes = 'messageGerman'
 dir_cur = Path().resolve()
@@ -125,21 +150,18 @@ dir_che = dir_out / 'check'
 dir_log = dir_out / 'log'
 pat_fie = dir_ini / 'fields.csv'
 pat_mes = dir_ini / 'message.csv'
-pat_sin = dir_ini / 'single_choice.csv'
 pat_log = dir_log / 'log_file.txt'
-
 pat_log.unlink(missing_ok=True)
+write_header_logfile(pat_log)
 dfr_mes = read_message_csv(pat_mes)
 dfr_fie = read_fields_csv(pat_fie)
 lis_xls = get_file_list_xls(dir_inp)
 for pat_inp in lis_xls:
-    dfr_res = read_file_xls(pat_inp, pat_sin, dfr_fie)
-    # print('----')
+    process_spring_report_xls(pat_inp, pat_fie, dfr_fie)
+# write_footer_logfile(pat_log)
 
-print('**** END ************************************************************************************')
-
+# -------------------------------------------------------------------------------
 # WEITER - TODO !!!
-# def write_log_file
 # .ini-file with language path absolut, etc. (configparse)
 
 # read csv single choice

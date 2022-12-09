@@ -32,6 +32,16 @@ fot_idn;Foto_ID;1219-5011
 nut_tri;Trinkwassernutzung;
 nut_sch;Schutzstatus;
 nut_kul;Kulturhistorische_Bedeutung;
+bru_neu;Fassung_Brunnenstube_mit_Ueberlauf_neu;
+bru_alt;Fassung_Brunnenstube_mit_Ueberlauf_alt;
+bru_ver;Fassung_Brunnenstube_mit_Ueberlauf_verfallen;
+r_b_neu;Fassung_Rohr_und_Becken_neu;
+r_b_alt;Fassung_Rohr_und_Becken_alt;
+r_b_ver;Fassung_Rohr_und_Becken_verfallen;
+r_r_neu;Fassung_nur_Rohr_Rinne_neu;
+r_r_alt;Fassung_nur_Rohr_Rinne_alt;
+r_r_ver;Fassung_nur_Rohr_Rinne_verfallen;
+fas_kei;Fassung_keine;1
 rev_obj;Revitalisierungsobjekt;JA
 kla_nat;Klassierung_naturnah;
 kla_bed;Klassierung_bedingt_naturnah;
