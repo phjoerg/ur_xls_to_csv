@@ -1,0 +1,8 @@
+Stationsnummer;QU_STA_AUSTRITTSFORM;QU_STA_HANGLAGE;QU_STA_ABFLUSSRICHTUNG;QU_STA_GELAENDENEIGUNG;QU_STA_TYP;QU_STA_GEOLOGIE_LOKAL;QU_STA_SCHUTZZONE_STATUS;QU_STA_AUFNAHME_ID;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND;QU_STA_FASS_ABDECKUNG;QU_STA_FASS_BAUART;QU_STA_SCHACHTTYP;QU_STA_ANZ_QUELLZULAEUFE;QU_STA_SCHACHT_UNTERLAGEN
+1202-5011;Tümpelquelle;Tallage;SO;schwach (0 - 5°);;;;;keine;;;;;;
+1202-5015;Sickerquelle;Hangfuss;NO;schroff (30 - 90°);;;;;;;;;;;
+1204-5025;Fliessquelle;Mittelhang;O;mässig (5 - 15°);;;;;keine;;;;;;
+1205-5005;Fallquelle;Mittelhang;SO;mässig (5 - 15°);;;;;nur Rohr / Rinne;neu;;;;;
+1205-5069;Fallquelle;Mittelhang;S;stark (15 - 30°);;;;;keine;;;;;;
+1219-5011;künstlich;Mittelhang;S;mässig (5 - 15°);;;;;keine;;;;;;
+1219-5061;Fallquelle;Oberhang;W;schroff (30 - 90°);;;;;keine;;;;;;

@@ -2,61 +2,66 @@ id;name;result
 pro_nam;Protokollname;Quellen Protokoll - Struktur
 que_ktn;Kanton;UR
 que_idn;ID;1202-5011
-que_nam;Quellname;BÃ¤zgand 1
-erh_dat;Datum;21.07.2021
-kox;Koord_X;687795
-koy;Koord_Y;166149
-flu_nam;Flurname;BÃ¤zgand
-hoe_uem;Hoehe_mueM;1392
-bea_nam;BearbeiterIn;kag
-aus_for;Austrittform;TÃ¼mpelquelle
+que_nam;Quelle;Bäzgand 1
+auf_dat;Datum;21.07.2021
+kox;Koordinaten X;687795
+koy;Koordinaten Y;166149
+flu_nam;Flurname;Bäzgand
+hoe_uem;Höhe ü.M.;1392
+auf_bea;BearbeiterIn;kag
+aus_for;Austrittsform;Tümpelquelle
 han_lag;Hanglage;Tallage
 abf_ric;Abflussrichtung;SO
-gel_nei;Gelaendeneigung;schwach
-qus_zei;Quellschuettung;ganzjÃ¤hrig
-mit_fli;Fliessgeschwindigkeit;mÃ¤ssig
-que_gro;Quelle_Groesse;5
+gel_nei;Geländeneigung;schwach (0 - 5°)
+qus_jah;Quellschüttung;ganzjährig
+mit_fli;Mittlere Fliessgeschwindigkeit;mässig (0.25 - 0.75 m/s)
+que_gro;Quellgrösse;5
 que_ber;Quellbereich;7
-que_lae;Quellbachlaenge;50
-wat_mes;Wassertemperatur_Messung;7.2
-qus_mes;Quellschuettung_Messung;36
-lef_mes;Leitfaehigkeit_Messung;45
+que_lae;Quellbachlänge;50
+wat_mes;Wassertemperatur – Messung;7.2
+qus_mes;Quellschüttung – Messung;36
+lef_mes;Leitfähigkeit – Messung;45
 ver_ein;Vernetzung_Einzelquelle;x
-ver_qsy;Vernetzung_Q_system;
-ver_qko;Vernetzung_Q_komplex;
-dis_nac;Distanz_Nachbarquelle;
-anz_aus;Anzahl_Austritte;1
-bem;Bemerkungen;"pH 7.40; Mollusca (Foto), WasserlÃ¤ufer, Jungfrosch; (Sommer 2021 mit sehr starken, anhaltenden RegenfÃ¤llen, Hochwasser)"
-fot_dok;Fotos_Dokumente;x
-fot_idn;Foto_ID;1202-5011
+ver_qsy;Vernetzung_Quellsystem;
+ver_qko;Vernetzung_Quellkomplex;
+dis_nac;Distanz zur Nachbarquelle;
+anz_aus;Anzahl Austritte;1
+str_bem;Bemerkungen;"pH 7.40; Mollusca (Foto), Wasserläufer, Jungfrosch; (Sommer 2021 mit sehr starken, anhaltenden Regenfällen, Hochwasser)"
+fot_dok;Fotos und andere Dokumente;x
+fot_idn;Fotos- und Dokumente-ID;1202-5011
 nut_tri;Trinkwassernutzung;
 nut_sch;Schutzstatus;
-nut_kul;Kulturhistorische_Bedeutung;
-bru_neu;Fassung_Brunnenstube_mit_Ueberlauf_neu;
-bru_alt;Fassung_Brunnenstube_mit_Ueberlauf_alt;
-bru_ver;Fassung_Brunnenstube_mit_Ueberlauf_verfallen;
-r_b_neu;Fassung_Rohr_und_Becken_neu;
-r_b_alt;Fassung_Rohr_und_Becken_alt;
-r_b_ver;Fassung_Rohr_und_Becken_verfallen;
-r_r_neu;Fassung_nur_Rohr_Rinne_neu;
-r_r_alt;Fassung_nur_Rohr_Rinne_alt;
-r_r_ver;Fassung_nur_Rohr_Rinne_verfallen;
+nut_kul;Kulturhistorische Bedeutung;
+bru_neu;Fassung_Brunnenstube mit Überlauf_neu;
+bru_alt;Fassung_Brunnenstube mit Überlauf_alt;
+bru_ver;Fassung_Brunnenstube mit Überlauf_verfallen;
+r_b_neu;Fassung_Rohr und Becken_neu;
+r_b_alt;Fassung_Rohr und Becken_alt;
+r_b_ver;Fassung_Rohr und Becken_verfallen;
+r_r_neu;Fassung_nur Rohr / Rinne_neu;
+r_r_alt;Fassung_nur Rohr / Rinne_alt;
+r_r_ver;Fassung_nur Rohr / Rinne_verfallen;
 fas_kei;Fassung_keine;1
 rev_obj;Revitalisierungsobjekt;JA
-kla_nat;Klassierung_naturnah;
-kla_bed;Klassierung_bedingt_naturnah;x
-kla_mae;Klassierung_maessig_beeintraechtigt;
-kla_ges;Klassierung_geschaedigt;
-kla_sta;Klassierung_stark_geschaedigt;
-be1;Bewertung_1;
-be2;Bewertung_2;
-be3;Bewertung_3;x
-be4;Bewertung_4;
-be5;Bewertung_5;
-wea;Wert_A_Beeintraechtigung;4
-web;Wert_B_Vegetation_Nutzung_Struktur;1.6785714285714286
-wer_auf;Aufwertung;0
-wer_ges;Gesamtergebnis;2.8392857142857144
-n_b_zer;Nicht_bewertbar_zerstoert;
-n_b_k_a;Nicht_bewertbar_kein_Abfluss;
-phw;pH_Wert_Messung;7.4
+ges_nat;Gesamteindruck_naturnah;
+ges_bed;Gesamteindruck_bedingt naturnah;x
+ges_mae;Gesamteindruck_mässig beeinträchtigt;
+ges_ges;Gesamteindruck_geschädigt;
+ges_sta;Gesamteindruck_stark geschädigt;
+bew_nat;Bewertung_naturnah (0.6 - 1.8);
+bew_bed;Bewertung_bedingt naturnah (1.81 - 2.6);
+bew_mae;Bewertung_mässig beeinträchtigt (2.61 - 3.4);x
+bew_ges;Bewertung_geschädigt (3.41 - 4.2);
+bew_sta;Bewertung_stark geschädigt (4.21 - 5.0);
+str_wea;Wert A;4
+str_web;Wert B;1.6785714285714286
+str_weg;Gesamtergebnis;2.8392857142857144
+n_b_zer;Bewertbarkeit_Quelle zerstört;
+n_b_k_a;Bewertbarkeit_kein Abfluss;
+phw;pH-Wert – Messung;7.4
+ver_typ;Vernetzung;Einzelquelle
+fas_typ;Fassung;keine
+fas_zus;Zustand;
+ges_typ;Gesamteindruck;bedingt naturnah
+bew_typ;Bewertung;mässig beeinträchtigt (2.61 - 3.4)
+qnb_typ;Quelle nicht bewertbar;

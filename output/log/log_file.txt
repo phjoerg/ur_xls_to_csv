@@ -1,37 +1,51 @@
----------------------------------------------------------------------------------------
-09.12.2022 19:15                                      Kanton Uri - Amt für Umweltschutz
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+22.03.2023 13:34                                  Kanton Uri - Amt für Umweltschutz (AfU)
+-----------------------------------------------------------------------------------------
 1202-5011 Bäzgand 1.xls
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1202-5015 Gandstafel 1.xls
----------------------------------------------------------------------------------------
+FEHLER – Daten unvollständig in Feld Austrittsform
+FEHLER – Daten unvollständig in Feld Hanglage
+FEHLER – Daten unvollständig in Feld Abflussrichtung
+FEHLER – Daten unvollständig in Feld Geländeneigung
+-----------------------------------------------------------------------------------------
+1202-5015 Gandstafel 1_test.xls
+-----------------------------------------------------------------------------------------
 1202-50xx Gand 1.xls
 FEHLER - Quellen-ID unvollständig oder fehlend
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1202-50xx Zen Staflen 6.xls
 FEHLER - Quellen-ID unvollständig oder fehlend
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1204-5025 Secki 1.xls
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1205-10xx Teilalp 5.xls
+FEHLER – Daten unvollständig in Feld Abflussrichtung
 FEHLER - Quellen-ID unvollständig oder fehlend
 FEHLER - Doppelte Auswahl bei Quelle nicht bewertbar und Wert A
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1205-5005 Spiss 1.xls
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1205-5017 Ennermatt 1.xls
+FEHLER – Daten unvollständig in Feld Austrittsform
+FEHLER – Daten unvollständig in Feld Hanglage
+FEHLER – Daten unvollständig in Feld Abflussrichtung
+FEHLER – Daten unvollständig in Feld Geländeneigung
 FEHLER – Quelle nicht bewertbar ankreuzen oder Zutreffendes markieren bei Vernetzung
 FEHLER – Quelle nicht bewertbar ankreuzen oder Zutreffendes markieren bei Fassung
-FEHLER – Quelle nicht bewertbar ankreuzen oder Zutreffendes markieren bei Klassierung
+FEHLER – Quelle nicht bewertbar ankreuzen oder Zutreffendes markieren bei Gesamteindruck
 FEHLER – Quelle nicht bewertbar ankreuzen oder Zutreffendes markieren bei Bewertung
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1205-5024 Stelli 4.xls
+FEHLER – Daten unvollständig in Feld Abflussrichtung
 FEHLER - Doppelte Auswahl bei Quelle nicht bewertbar und Wert A
 FEHLER - Doppelte Auswahl bei Quelle nicht bewertbar und Wert B
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1205-5069 Lücken 1.xls
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1219-5011 Unter Balm 3.xls
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 1219-5061 Ueligschwand 2.xls
----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+Wiski-Importdateien(csv) erfolgreich erstellt - Anzahl Einträge: 7
+-----------------------------------------------------------------------------------------

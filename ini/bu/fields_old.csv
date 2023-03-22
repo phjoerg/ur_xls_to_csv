@@ -1,0 +1,67 @@
+name;id;line;column;mandatory_field;single_choice;name_typ;zustand_typ;wiski_1;wiski_2
+Protokollname;pro_nam;1;A;;;;;;
+Kanton;que_ktn;1;R;1;;;;;
+ID;que_idn;1;U;1;;;;Stationsnummer;
+Quelle;que_nam;3;C;1;;;;;
+Datum;auf_dat;3;N;1;;;;QU_STR_AUFN_DAT;
+Koordinaten X;kox;3;T;1;;;;;
+Koordinaten Y;koy;3;V;1;;;;;
+Flurname;flu_nam;5;C;;;;;;
+Höhe ü.M.;hoe_uem;5;N;1;;;;;
+BearbeiterIn;auf_bea;5;T;1;;;;QU_STR_AUFN_BEARBEITER;
+Austrittsform;aus_for;9;D;1;;;;QU_STA_AUSTRITTSFORM;
+Hanglage;han_lag;11;D;1;;;;QU_STA_HANGLAGE;
+Abflussrichtung;abf_ric;13;D;1;;;;QU_STA_ABFLUSSRICHTUNG;
+Geländeneigung;gel_nei;15;D;1;;;;QU_STA_GELAENDENEIGUNG;
+Quellschüttung;qus_jah;17;D;;;;;QU_STR_SCHUETTUNG;
+Mittlere Fliessgeschwindigkeit;mit_fli;19;D;;;;;QU_STR_MITTL_FLIESSGESCHW;
+Quellgrösse;que_gro;9;J;;;;;QU_STR_GROESSE;
+Quellbereich;que_ber;11;J;;;;;QU_STR_BEREICH;
+Quellbachlänge;que_lae;13;J;;;;;QU_STR_BACHLAENGE;
+Wassertemperatur – Messung;wat_mes;15;J;;;;;;
+Quellschüttung – Messung;qus_mes;17;J;;;;;;
+Leitfähigkeit – Messung;lef_mes;19;J;;;;;;
+Vernetzung_Einzelquelle;ver_ein;9;S;;1;ver_typ;;QU_STR_VERNETZUNG;
+Vernetzung_Q-system;ver_qsy;9;U;;1;ver_typ;;QU_STR_VERNETZUNG;
+Vernetzung_Q-komplex;ver_qko;9;W;;1;ver_typ;;QU_STR_VERNETZUNG;
+Distanz zur Nachbarquelle;dis_nac;11;R;;;;;QU_STR_DIST_NACHBARQUELLE;
+Anzahl Austritte;anz_aus;11;V;;;;;QU_STR_ANZ_AUSTRITTE;
+Bemerkungen;str_bem;13;Q;;;;;QU_STR_BEMERKUNGEN;
+Fotos und andere Dokumente;fot_dok;17;Q;;;;;;
+Fotos- und Dokumente-ID;fot_idn;17;S;;;;;;
+Trinkwassernutzung;nut_tri;19;Q;;;;;;
+Schutzstatus;nut_sch;19;S;;;;;;
+Kulturhistorische Bedeutung;nut_kul;19;W;;;;;;
+Fassung_Brunnenstube mit Überlauf_neu;bru_neu;27;F;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_Brunnenstube mit Überlauf_alt;bru_alt;27;H;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_Brunnenstube mit Überlauf_verfallen;bru_ver;27;J;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_Rohr und Becken_neu;r_b_neu;29;F;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_Rohr und Becken_alt;r_b_alt;29;H;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_Rohr und Becken_verfallen;r_b_ver;29;J;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_nur Rohr / Rinne_neu;r_r_neu;31;F;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_nur Rohr / Rinne_alt;r_r_alt;31;H;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_nur Rohr / Rinne_verfallen;r_r_ver;31;J;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Fassung_keine;fas_kei;33;J;;2;fas_typ;fas_zus;QU_STA_FASS_TYP;QU_STA_FASS_ZUSTAND
+Revitalisierungsobjekt;rev_obj;124;G;;;;;QU_STR_REVIT_OBJEKT;
+Gesamteindruck_naturnah;ges_nat;127;G;;3;ges_typ;;QU_STR_GESAMT_EINDRUCK;
+Gesamteindruck_bedingt naturnah;ges_bed;128;G;;3;ges_typ;;QU_STR_GESAMT_EINDRUCK;
+Gesamteindruck_mässig beeinträchtigt;ges_mae;129;G;;3;ges_typ;;QU_STR_GESAMT_EINDRUCK;
+Gesamteindruck_geschädigt;ges_ges;130;G;;3;ges_typ;;QU_STR_GESAMT_EINDRUCK;
+Gesamteindruck_stark geschädigt;ges_sta;131;G;;3;ges_typ;;QU_STR_GESAMT_EINDRUCK;
+Bewertung_naturnah;bew_nat;127;M;;4;bew_typ;;QU_STR_BEWERTUNG;
+Bewertung_bedingt naturnah;bew_bed;128;M;;4;bew_typ;;QU_STR_BEWERTUNG;
+Bewertung_mässig beeinträchtigt;bew_mae;129;M;;4;bew_typ;;QU_STR_BEWERTUNG;
+Bewertung_geschädigt;bew_ges;130;M;;4;bew_typ;;QU_STR_BEWERTUNG;
+Bewertung_stark geschädigt;bew_sta;131;M;;4;bew_typ;;QU_STR_BEWERTUNG;
+Wert A;str_wea;122;I;;;;;QU_STR_WERT_A;
+Wert B;str_web;122;V;;;;;QU_STR_WERT_B;
+Gesamtergebnis;str_weg;126;V;;;;;QU_STR_GESAMTERGEBNIS;
+Bewertbarkeit_Quelle zerstört;n_b_zer;129;U;;;;;QU_STR_NICHT_BEWERTBAR;
+Bewertbarkeit_kein Abfluss;n_b_k_a;131;U;;;;;QU_STR_NICHT_BEWERTBAR;
+pH-Wert – Messung;phw;;;;;;;;
+Vernetzung;ver_typ;;;;;;;;
+Fassung;fas_typ;;;;;;;;
+Zustand;fas_zus;;;;;;;;
+Klassierung;ges_typ;;;;;;;;
+Bewertung;bew_typ;;;;;;;;
+Quelle nicht bewertbar;qnb_typ;;;;;;;;

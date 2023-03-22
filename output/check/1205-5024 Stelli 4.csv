@@ -2,61 +2,66 @@ id;name;result
 pro_nam;Protokollname;Quellen Protokoll - Struktur
 que_ktn;Kanton;UR
 que_idn;ID;1205-5024
-que_nam;Quellname;Stelli 4
-erh_dat;Datum;18.08.2021
-kox;Koord_X;697147
-koy;Koord_Y;196038
+que_nam;Quelle;Stelli 4
+auf_dat;Datum;18.08.2021
+kox;Koordinaten X;697147
+koy;Koordinaten Y;196038
 flu_nam;Flurname;Stelli
-hoe_uem;Hoehe_mueM;1789
-bea_nam;BearbeiterIn;kag
-aus_for;Austrittform;kÃ¼nstlich
+hoe_uem;Höhe ü.M.;1789
+auf_bea;BearbeiterIn;kag
+aus_for;Austrittsform;künstlich
 han_lag;Hanglage;Mittelhang
 abf_ric;Abflussrichtung;
-gel_nei;Gelaendeneigung;mÃ¤ssig
-qus_zei;Quellschuettung;
-mit_fli;Fliessgeschwindigkeit;stehend
-que_gro;Quelle_Groesse;1
+gel_nei;Geländeneigung;mässig (5 - 15°)
+qus_jah;Quellschüttung;
+mit_fli;Mittlere Fliessgeschwindigkeit;stehend (< 0.05 m/s)
+que_gro;Quellgrösse;1
 que_ber;Quellbereich;1
-que_lae;Quellbachlaenge;0
-wat_mes;Wassertemperatur_Messung;15.5
-qus_mes;Quellschuettung_Messung;0.1
-lef_mes;Leitfaehigkeit_Messung;215
+que_lae;Quellbachlänge;0
+wat_mes;Wassertemperatur – Messung;15.5
+qus_mes;Quellschüttung – Messung;0.1
+lef_mes;Leitfähigkeit – Messung;215
 ver_ein;Vernetzung_Einzelquelle;
-ver_qsy;Vernetzung_Q_system;x
-ver_qko;Vernetzung_Q_komplex;
-dis_nac;Distanz_Nachbarquelle;35
-anz_aus;Anzahl_Austritte;1
-bem;Bemerkungen;"pH 8.80; Hahn war zugedreht"
-fot_dok;Fotos_Dokumente;
-fot_idn;Foto_ID;
+ver_qsy;Vernetzung_Quellsystem;x
+ver_qko;Vernetzung_Quellkomplex;
+dis_nac;Distanz zur Nachbarquelle;35
+anz_aus;Anzahl Austritte;1
+str_bem;Bemerkungen;"pH 8.80; Hahn war zugedreht"
+fot_dok;Fotos und andere Dokumente;
+fot_idn;Fotos- und Dokumente-ID;
 nut_tri;Trinkwassernutzung;
 nut_sch;Schutzstatus;
-nut_kul;Kulturhistorische_Bedeutung;
-bru_neu;Fassung_Brunnenstube_mit_Ueberlauf_neu;
-bru_alt;Fassung_Brunnenstube_mit_Ueberlauf_alt;
-bru_ver;Fassung_Brunnenstube_mit_Ueberlauf_verfallen;
-r_b_neu;Fassung_Rohr_und_Becken_neu;
-r_b_alt;Fassung_Rohr_und_Becken_alt;1
-r_b_ver;Fassung_Rohr_und_Becken_verfallen;
-r_r_neu;Fassung_nur_Rohr_Rinne_neu;
-r_r_alt;Fassung_nur_Rohr_Rinne_alt;
-r_r_ver;Fassung_nur_Rohr_Rinne_verfallen;
+nut_kul;Kulturhistorische Bedeutung;
+bru_neu;Fassung_Brunnenstube mit Überlauf_neu;
+bru_alt;Fassung_Brunnenstube mit Überlauf_alt;
+bru_ver;Fassung_Brunnenstube mit Überlauf_verfallen;
+r_b_neu;Fassung_Rohr und Becken_neu;
+r_b_alt;Fassung_Rohr und Becken_alt;1
+r_b_ver;Fassung_Rohr und Becken_verfallen;
+r_r_neu;Fassung_nur Rohr / Rinne_neu;
+r_r_alt;Fassung_nur Rohr / Rinne_alt;
+r_r_ver;Fassung_nur Rohr / Rinne_verfallen;
 fas_kei;Fassung_keine;
 rev_obj;Revitalisierungsobjekt;JA
-kla_nat;Klassierung_naturnah;
-kla_bed;Klassierung_bedingt_naturnah;
-kla_mae;Klassierung_maessig_beeintraechtigt;
-kla_ges;Klassierung_geschaedigt;
-kla_sta;Klassierung_stark_geschaedigt;x
-be1;Bewertung_1;
-be2;Bewertung_2;
-be3;Bewertung_3;
-be4;Bewertung_4;
-be5;Bewertung_5;x
-wea;Wert_A_Beeintraechtigung;5
-web;Wert_B_Vegetation_Nutzung_Struktur;3.5740740740740744
-wer_auf;Aufwertung;0
-wer_ges;Gesamtergebnis;4.287037037037037
-n_b_zer;Nicht_bewertbar_zerstoert;
-n_b_k_a;Nicht_bewertbar_kein_Abfluss;x
-phw;pH_Wert_Messung;8.8
+ges_nat;Gesamteindruck_naturnah;
+ges_bed;Gesamteindruck_bedingt naturnah;
+ges_mae;Gesamteindruck_mässig beeinträchtigt;
+ges_ges;Gesamteindruck_geschädigt;
+ges_sta;Gesamteindruck_stark geschädigt;x
+bew_nat;Bewertung_naturnah (0.6 - 1.8);
+bew_bed;Bewertung_bedingt naturnah (1.81 - 2.6);
+bew_mae;Bewertung_mässig beeinträchtigt (2.61 - 3.4);
+bew_ges;Bewertung_geschädigt (3.41 - 4.2);
+bew_sta;Bewertung_stark geschädigt (4.21 - 5.0);x
+str_wea;Wert A;5
+str_web;Wert B;3.5740740740740744
+str_weg;Gesamtergebnis;4.287037037037037
+n_b_zer;Bewertbarkeit_Quelle zerstört;
+n_b_k_a;Bewertbarkeit_kein Abfluss;x
+phw;pH-Wert – Messung;8.8
+ver_typ;Vernetzung;Quellsystem
+fas_typ;Fassung;Rohr und Becken
+fas_zus;Zustand;alt
+ges_typ;Gesamteindruck;stark geschädigt
+bew_typ;Bewertung;stark geschädigt (4.21 - 5.0)
+qnb_typ;Quelle nicht bewertbar;kein Abfluss

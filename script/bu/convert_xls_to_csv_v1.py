@@ -1,6 +1,7 @@
 from operator import index
 import sys
 import re
+import shutil
 from pathlib import Path
 import time
 from datetime import datetime, timedelta
@@ -20,7 +21,7 @@ def write_header_logfile(pat_log):
     sum_tim = bool(time.localtime(cur_tim.timestamp()).tm_isdst)
     if sum_tim:
         cur_tim = cur_tim - timedelta(hours=1)
-    txt = '                                      Kanton Uri - Amt für Umweltschutz'
+    txt = '                                Kanton Uri - Amt für Umweltschutz (AfU)'
     cur_tim = cur_tim.strftime('%d.%m.%Y %H:%M')
     hea = lin + '\n' + cur_tim + txt + '\n' + lin
     write_log_file(pat_log, hea)
@@ -40,7 +41,7 @@ def read_message_csv(pat_mes):
     return dfr_mes
 
 
-def get_file_list_xls(dir_inp):
+def get_file_list_xls(pat_log, dir_inp):
     """return list of xls-files"""
     lis_xls = list(Path(str(dir_inp)).glob('*.xls'))
     if not lis_xls:
@@ -66,42 +67,58 @@ def read_fields_csv(pat_fie):
     return dfr_fie
 
 
-def check_values(dfr_res):
-    erh_dat = dfr_res.loc['erh_dat', 'result']
-    dfr_res.loc['erh_dat', 'result'] = erh_dat.strftime("%d.%m.%Y")
-    dfr_res.loc['phw', 'name'] = 'pH_Wert_Messung'
-    bem = dfr_res.loc['bem', 'result']
-    if 'PH' in bem.upper():
-        dfr_res.loc['phw', 'result'] = float(re.search("(?i)pH *(\d*\.?\d+)[ |\;|\,]", bem)[1])
+def copy_template_csv(pat_te1, pat_sta):
+    shutil.copy(pat_te1, pat_sta)
+    dfr_sta = pd.read_csv(str(pat_sta), delimiter=';')
+    return dfr_sta
+
+
+def check_values(pat_log, dfr_res, wri_csv):
+    auf_dat = dfr_res.loc['auf_dat', 'result']
+    dfr_res.loc['auf_dat', 'result'] = auf_dat.strftime("%d.%m.%Y")
+    # dfr_res.loc['phw', 'name'] = 'pH_Wert_Messung'
+    str_bem = dfr_res.loc['str_bem', 'result']
+    if 'PH' in str_bem.upper():
+        dfr_res.loc['phw', 'result'] = float(re.search("(?i)pH *(\d*\.?\d+)[ |\;|\,]", str_bem)[1])
     else:
         dfr_res.loc['phw', 'result'] = float('nan')
     que_idn = str(dfr_res.loc['que_idn', 'result'])
     if 'NAN' in que_idn.upper() or 'X' in que_idn.upper():
         write_log_file(pat_log, dfr_mes.loc[4, lan_mes])
-    return dfr_res
+        wri_csv = 0
+    aus_for = str(dfr_res.loc['aus_for', 'result'])
+    if 'NAN' in aus_for.upper():
+        write_log_file(pat_log, dfr_mes.loc[5, lan_mes])
+        wri_csv = 0
+    return dfr_res, wri_csv
 
 
-def cross_check_fields(dfr_res, cou, i, gro_nam, pat_log):
+def cross_check_fields(dfr_res, cou, i, gro_nam, pat_log, wri_csv):
     """check Quelle nicht bewertbar against other fields"""
     n_b_zer = str(dfr_res.loc['n_b_zer', 'result'])
     n_b_k_a = str(dfr_res.loc['n_b_k_a', 'result'])
-    wea = dfr_res.loc['wea', 'result']
-    web = dfr_res.loc['web', 'result']
+    str_wea = dfr_res.loc['str_wea', 'result']
+    str_web = dfr_res.loc['str_web', 'result']
     que_n_b = 0
     if n_b_zer.upper() == 'X' or n_b_k_a.upper() == 'X':
         que_n_b = 1
     if cou == 0 and que_n_b == 0:
-        write_log_file(pat_log, dfr_mes.loc[5, lan_mes] + ' ' + gro_nam)
-    elif cou > 1:
         write_log_file(pat_log, dfr_mes.loc[6, lan_mes] + ' ' + gro_nam)
-    elif i == 3 and que_n_b == 1 and not pd.isna(wea):
-        write_log_file(pat_log, dfr_mes.loc[7, lan_mes])
-    elif i == 4 and que_n_b == 1 and not pd.isna(web):
+        wri_csv = 0
+    elif cou > 1:
+        write_log_file(pat_log, dfr_mes.loc[7, lan_mes] + ' ' + gro_nam)
+        wri_csv = 0
+    elif i == 3 and que_n_b == 1 and not pd.isna(str_wea):
         write_log_file(pat_log, dfr_mes.loc[8, lan_mes])
+        wri_csv = 0
+    elif i == 4 and que_n_b == 1 and not pd.isna(str_web):
+        write_log_file(pat_log, dfr_mes.loc[9, lan_mes])
+        wri_csv = 0
+    return wri_csv
 
 
-def check_single_choice(pat_fie, pat_log, dfr_res):
-    """check single-choice groups"""
+def check_single_choice(pat_fie, pat_log, dfr_res, wri_csv):
+    """check single-choice groups 1, 2, 3, 4 from fields.csv"""
     dfr_sin = pd.read_csv(str(pat_fie), delimiter=';')
     dfr_sin = dfr_sin.set_index('single_choice')
     idx_max = int(dfr_sin.index.max() + 1)
@@ -110,30 +127,64 @@ def check_single_choice(pat_fie, pat_log, dfr_res):
         ser_sin = dfr_sin.loc[i, 'id']
         # group name = first token of name (f.e. 'Vernetzung')
         gro_nam = dfr_sin.loc[i, 'name'].iloc[0].partition('_')[0]
-        res = ''
+        nam_typ = dfr_sin.loc[i, 'name_typ'].iloc[0]
+        zus_typ = dfr_sin.loc[i, 'zustand_typ'].iloc[0]
+        nam = ''
         cou = 0
         for cur in ser_sin:
-            mem = dfr_res.loc[cur, 'result']
-            if mem == 'x' or mem == 'X' or mem == 1:
-                # res = dfr_res.loc[cur, 'name']      res (string) ev. nec. for csv ?
+            nam = dfr_res.loc[cur, 'name']
+            res = dfr_res.loc[cur, 'result']
+            if res == 'x' or res == 'X':
+                kat_nam = nam.partition('_')[2]
+                # dfr_res.loc[nam_typ, 'name'] = gro_nam
+                dfr_res.loc[nam_typ, 'result'] = kat_nam
                 cou += 1
-        cross_check_fields(dfr_res, cou, i, gro_nam, pat_log)
+            elif res == 1:
+                kat_nam = nam.split('_')[1]
+                dfr_res.loc[nam_typ, 'result'] = kat_nam
+                if not kat_nam == 'keine':
+                    zus_nam = nam.split('_')[2]
+                    dfr_res.loc[zus_typ, 'result'] = zus_nam
+                # dfr_res.loc[nam_typ, 'name'] = gro_nam
+                # dfr_res.loc[zus_typ, 'name'] = 'Zustand'
+                cou += 1
+        wri_csv = cross_check_fields(dfr_res, cou, i, gro_nam, pat_log, wri_csv)
+    return dfr_res, wri_csv
 
 
-def process_spring_report_xls(pat_inp, pat_fie, dfr_fie):
+def process_struktur_xls(pat_inp, pat_fie, pat_log, dir_che, dfr_fie):
     """read defined fields of xls file and return to dfr_res"""
+    # write csv - 1...yes (default) / 2...no (FEHLER in message.csv)
+    wri_csv = 1
     write_log_file(pat_log, pat_inp.name)
     dfr_str = pd.read_excel(str(pat_inp), sheet_name='Q_Bewertung_Struktur_D', header=None)
     dfr_str = dfr_str.rename(index=lambda x: x + 1, columns=lambda y: colToExcel(y + 1))
     dfr_res = dfr_fie[['name']]
     for ind, row in dfr_fie.iterrows():
-        dfr_res.loc[ind, 'result'] = dfr_str.loc[row['line'], row['column']]
-    dfr_res = check_values(dfr_res)
-    check_single_choice(pat_fie, pat_log, dfr_res)
+        # skip last lines with empty fields
+        if not pd.isna(dfr_fie.loc[ind, 'line']):
+            dfr_res.loc[ind, 'result'] = dfr_str.loc[row['line'], row['column']]
+    dfr_res, wri_csv = check_values(pat_log, dfr_res, wri_csv)
+    dfr_res, wri_csv = check_single_choice(pat_fie, pat_log, dfr_res, wri_csv)
     fil_che = pat_inp.stem + '.csv'
     pat_che = dir_che / fil_che
     dfr_res.to_csv(pat_che, sep=';')
     write_log_file(pat_log, lin)
+    return dfr_res, wri_csv
+
+
+def write_standort_csv(dfr_fie, dfr_res, dfr_sta):
+    # new_row: dic with 'QU_AUSTRITTSFORM': 'Tümpelquelle' etc.
+    new_row = pd.Series({dfr_fie.loc['que_idn', 'wiski_1']: dfr_res.loc['que_idn', 'result'],
+                         dfr_fie.loc['aus_for', 'wiski_1']: dfr_res.loc['aus_for', 'result'],
+                         dfr_fie.loc['han_lag', 'wiski_1']: dfr_res.loc['han_lag', 'result'],
+                         dfr_fie.loc['abf_ric', 'wiski_1']: dfr_res.loc['abf_ric', 'result'],
+                         dfr_fie.loc['gel_nei', 'wiski_1']: dfr_res.loc['gel_nei', 'result'],
+                         dfr_fie.loc['fas_kei', 'wiski_1']: dfr_res.loc['fas_typ', 'result'],
+                         dfr_fie.loc['fas_kei', 'wiski_2']: dfr_res.loc['fas_zus', 'result']})
+    # append to empty dfr_sta
+    dfr_sta = pd.concat([dfr_sta, new_row.to_frame().T], ignore_index=True)
+    dfr_sta.to_csv(pat_sta, sep=';', mode='a', index=False, header=False)
 
 
 global lin
@@ -148,130 +199,36 @@ dir_inp = dir_cur / 'input'
 dir_out = dir_cur / 'output'
 dir_che = dir_out / 'check'
 dir_log = dir_out / 'log'
+dir_tem = dir_ini / 'templates'
 pat_fie = dir_ini / 'fields.csv'
 pat_mes = dir_ini / 'message.csv'
+pat_te1 = dir_tem / 'KK_standort.csv'
+# pat_te2 = dir_tem / 'KK_struktur.csv'
+pat_sta = dir_out / 'KK_standort.csv'
 pat_log = dir_log / 'log_file.txt'
 pat_log.unlink(missing_ok=True)
 write_header_logfile(pat_log)
 dfr_mes = read_message_csv(pat_mes)
 dfr_fie = read_fields_csv(pat_fie)
-lis_xls = get_file_list_xls(dir_inp)
+dfr_sta = copy_template_csv(pat_te1, pat_sta)
+lis_xls = get_file_list_xls(pat_log, dir_inp)
 for pat_inp in lis_xls:
-    process_spring_report_xls(pat_inp, pat_fie, dfr_fie)
+    dfr_res, wri_csv = process_struktur_xls(pat_inp, pat_fie, pat_log, dir_che, dfr_fie)
+    if wri_csv:
+        write_standort_csv(dfr_fie, dfr_res, dfr_sta)
 # write_footer_logfile(pat_log)
 
 # -------------------------------------------------------------------------------
 # WEITER - TODO !!!
-# .ini-file with language path absolut, etc. (configparse)
+# single choice x (bringt nichts) - ich brauche result (z.B. Einzelquelle) für Eintrag csv
+# 1. token weglassen (delimiter _) z.B. Klassierung_bedingt naturnah  (d.h. 2. Unterstrich in fields weglöschen !!!)
+# output: richtiges KK_standort.csv generieren, etc.
 
-# read csv single choice
-# single choice - warnungen bestehend einpflegen
-# logfile erzeugen immer eine Zeile mit xls ---
-# nä. Zeile ok oder Meldungen (Warnungen / Error)
-# Simon: Was sind Pflichtfelder - wo soll py Alarm schlagen?
+# Kosmetik: .ini-file with language path absolut, etc. (configparse)
 # chained assignment nicht deaktivieren
+# write csv
+# only if no FEHLER (message.csv) occurs
 
-# split up input fields to several pandas series (row) for each csv wiski output (row)
-# first check input fields necessary for csv
-# then check input fields for remaining fields
-
-# format Wert A/B, Aufwertung and pH-Wert to 2 NKS (nicht so dringend)
-
-
-# kla = ''
-# kla_cou = 0
-# kla_ein = dfr_str.loc[9, 'S']
-# kla_sys = dfr_str.loc[9, 'U']
-# kla_kom = dfr_str.loc[9, 'W']
-# if kla_ein.upper() == 'X':
-#     kla = 'Einzelquelle'
-#     kla_cou += 1
-# if kla_sys.upper() == 'X':
-#     kla = 'Quellsystem'
-#     kla_cou += 1
-# if kla_kom.upper() == 'X':
-#     kla = 'Quellkomplex'
-#     kla_cou += 1
-# if kla_cou == 0:
-#     sys.exit('ERROR - fehlendes X bei Vernetzung')
-# elif kla_cou > 1:
-#     sys.exit('ERROR - Mehrfachauswahl bei Vernetzung')
-#
-# fot_dok = dfr_str.loc[17, 'Q']
-# fot_idn = dfr_str.loc[17, 'S']
-# if fot_dok == 'x' or fot_dok == 'X':
-#     fot_dok = True
-# else:
-#     fot_dok = False
-#     if fot_idn:
-#         sys.exit('ERROR - fehlendes X bei Fotos / Dokumente')
-# nut = ''
-# nut_tri = dfr_str.loc[19, 'Q']
-# nut_sch = dfr_str.loc[19, 'S']
-# nut_kul = dfr_str.loc[19, 'W']
-# if nut_tri.upper() == 'X':
-#     nut = 'Trinkwassernutzung'
-# if nut_sch.upper() == 'X':
-#     if nut:
-#         nut = nut + ', Schutzstatus'
-#     else:
-#         nut = 'Schutzstatus'
-# if nut_kul.upper() == 'X':
-#     if nut:
-#         nut = nut + ', Kulturhistorische Bedeutung'
-#     else:
-#         nut = 'Kulturhistorische Bedeutung'
-# # Protokoll - Fuss -------------------------------------------------------------------------------------------------
-# rev_obj = dfr_str.loc[124, 'G']
-# if rev_obj.upper() == 'JA':
-#     rev_obj = True
-# elif rev_obj.upper() == 'NEIN':
-#     rev_obj = False
-# else:
-#     sys.exit('ERROR - fehlende Eingabe (J/N) bei Revitalisierungsobjekt')
-# kla = ''
-# kla_cou = 0
-# kla_nat = dfr_str.loc[127, 'G']
-# kla_bed = dfr_str.loc[128, 'G']
-# kla_mae = dfr_str.loc[129, 'G']
-# kla_ges = dfr_str.loc[130, 'G']
-# kla_sta = dfr_str.loc[131, 'G']
-# if kla_nat.upper() == 'X':
-#     kla = 'naturnah'
-#     kla_cou += 1
-# if kla_bed.upper() == 'X':
-#     kla = 'bedingt naturnah'
-#     kla_cou += 1
-# if kla_mae.upper() == 'X':
-#     kla = 'mässig beeinträchtigt'
-#     kla_cou += 1
-# if kla_ges.upper() == 'X':
-#     kla = 'geschädigt'
-#     kla_cou += 1
-# if kla_sta.upper() == 'X':
-#     kla = 'stark geschädigt'
-#     kla_cou += 1
-# if kla_cou == 0:
-#     sys.exit('ERROR - fehlendes X bei Vernetzung')
-# elif kla_cou > 1:
-#     sys.exit('ERROR - Mehrfachauswahl bei Vernetzung')
-# bew = ''
-# bew_1__ = dfr_str.loc[127, 'M']
-# bew_2__ = dfr_str.loc[128, 'M']
-# bew_3__ = dfr_str.loc[129, 'M']
-# bew_4__ = dfr_str.loc[130, 'M']
-# bew_5__ = dfr_str.loc[131, 'M']
-# # WEITER !!! if... keine Mehrfachauswahl und kein Leerlassen erlaubt
-# # def für mehrfachausw., etc. NICHT erlaubt mit dic kla_nat = {dfr_str.loc[127, 'G'], 'naturnah'}
-# # weiteres für mehrfachausw., etc. erlaubt
-# n_b = ''
-# n_b_zer = dfr_str.loc[129, 'U']
-# n_b_k_A = dfr_str.loc[131, 'U']
-# # if...  Mehrfachauswahl und Leerlassen erlaubt
-
-# wer_a__ = float(dfr_str.loc[122, 'I'])
-# wer_b__ = float(dfr_str.loc[122, 'V'])
-# wer_auf = float(dfr_str.loc[124, 'V'])
-# wer_ges = float(dfr_str.loc[126, 'V'])
-
-# print('xxx')
+# Kopfdaten
+# Es gibt zahlreiche pulldownmenüs mit (optional) leerem Feld -
+# soll dies auch mit einer Fehlermeldung quittiert werden?
